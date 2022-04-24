@@ -8,7 +8,6 @@ import {randomText} from "../../Services/random";
 const CheckBoxSection: FC<CheckBoxSectionProps> = ({data}) => {
     const [accept, setAccept] = useState(false)
     const [checkedState, setCheckedState] = useState(new Array(data.checkbox.length).fill(false));
-    const [isDisable, setIsDisable] = useState(false)
 
     useEffect(() => {
         if (accept) {
@@ -20,12 +19,7 @@ const CheckBoxSection: FC<CheckBoxSectionProps> = ({data}) => {
         const updatedCheckedState = checkedState.map((item, index) =>
             index === position ? !item : item
         );
-        if (data.title === "Foundation") {
-            updatedCheckedState.every(item => item === true) ? setAccept(true) : setAccept(false)
-            if (updatedCheckedState) {
-                setIsDisable(true)
-            }
-        }
+        updatedCheckedState.every(item => item === true) ? setAccept(true) : setAccept(false)
         setCheckedState(updatedCheckedState);
     }
 
@@ -43,7 +37,6 @@ const CheckBoxSection: FC<CheckBoxSectionProps> = ({data}) => {
                     key={index}
                     handleOnChange={() => handleOnChange(index)}
                     checkedState={checkedState[index]}
-                    disabled={isDisable}
                 />
             )}
         </div>
